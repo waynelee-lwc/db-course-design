@@ -1,0 +1,83 @@
+body,html{
+    padding: 0rem;
+    margin: 0rem;
+    height: 100%;
+    width: 100%;
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+    box-shadow: 0rem 0rem 1rem lightblue;
+    /* background-color: blue; */
+}
+
+.user-info{
+    /* border-right: 1px solid; */
+    border-right: 1px solid;
+    padding: 0rem;
+}
+
+.dashboard{
+    padding: 0rem;
+}
+
+.icon{
+    width: 8rem;
+    height: 8rem;
+    margin: auto;
+    margin-top: 4rem;
+    background-image: url(./user.png);
+    background-size: 100%;
+}
+
+.userinfo{
+    text-align: center;
+    font-size: 1.375rem;
+    margin-top: 3rem; 
+    padding: 0rem 1rem;
+}
+
+.profile{
+    width: 100%;
+    height: 30rem;
+    margin: auto;
+    margin-top: 3rem;
+    border-top: 1px solid gray;
+    padding-top: 2rem;
+}
+
+.profile-wrapper{
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+
+.profile-title{
+    font-size: 1.25rem;
+}
+
+.profile-item{
+    margin-top: 2rem;
+}
+
+.profile-item label{
+    margin-bottom: 0.25rem;
+    font-size: 1.12rem;
+    font-weight: bold;
+    padding-left: 0.25rem;
+}
+
+.profile-item input{
+    border: 0rem;
+    border-bottom: 2px solid;
+    padding: 0rem 0.25rem;
+    border-radius: 0rem;
+}
+
+.profile-submit{
+    margin: auto;
+    display: block;
+    margin-top: 2.5rem;
+    width: 100%;    
+}

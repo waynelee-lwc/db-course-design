@@ -81,3 +81,70 @@ body,html{
     margin-top: 2.5rem;
     width: 100%;    
 }
+
+.dashboard-wrapper{
+    /* border: 1px solid; */
+    width: 95%;
+    margin: auto;
+    height: 92%;
+    margin-top: 3%;
+}
+
+.search-bar{
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid;
+}
+
+.search-bar-wrapper{
+    height: 65%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-item{
+
+}
+
+.search-item label{
+
+}
+
+.search-item input{
+
+}
+
+.search-submit{
+    height: 2.5rem;
+}
+
+.section-table{
+    width: 100%;
+    height: 40%;
+    overflow: auto;
+    border-bottom: 4px double;
+}
+
+.section-table table,
+.score-table table{
+    text-align: center;
+}
+
+.score-table{
+    width: 100%;
+    height: 45%;
+    overflow: auto;
+    margin-top: 5%;
+    border-bottom: 4px double;
+    border-top: 1px solid;
+}
+
+.section-table .title,
+.score-table .title,
+.search-bar .title{
+    font-size: 1.25rem;
+    color: gray;
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.18.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "db-course-design",
+  "description": "数据库课程设计",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waynelee-lwc/db-course-design.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waynelee-lwc/db-course-design/issues"
+  },
+  "homepage": "https://github.com/waynelee-lwc/db-course-design#readme"
+}

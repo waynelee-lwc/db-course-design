@@ -1,0 +1,7 @@
+{
+	"host":	"60.205.211.19",
+	"port":	3306,
+	"user":	"db_course_design",
+	"password":	"jlu_DB_2119",
+	"database": "db_course_design"
+}

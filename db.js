@@ -1,8 +1,5 @@
 var fs = require('fs')
 var mysql = require('mysql')
-var shell = require('shelljs')
-
-console.log(shell.pwd().stdout)
 var db_config_path = './db_config.json'
 var db_config_data = fs.readFileSync(db_config_path)
 db_config_data = JSON.parse(db_config_data)

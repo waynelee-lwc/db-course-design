@@ -10,8 +10,10 @@ async function user_login(req,res){
     if(data.role == "student") {
     	sql = mysql.format('select * from student where SID = ?', data.id)
     	table = "student"
-    } 
-    else {
+    } else if(data.role == "teacher") {
+    	sql = mysql.format('select * from instructor where IID = ?', data.id)
+    	table = "instructor"
+    } else {
     	res.end("error role")
     }
     var result = await query(sql)
@@ -19,7 +21,7 @@ async function user_login(req,res){
     	"message": "",
     	"code": 200	
     }
-    console.log(result)
+    // console.log(result)
     if(result.length == 0) {
     	res.send({
 			"message": "用户不存在",

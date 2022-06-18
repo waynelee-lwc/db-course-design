@@ -50,6 +50,18 @@ app.get('/search/get_time_slog_list_by_student', search_get_time_slog_list_by_st
 search_get_time_slog_list_by_teacher = require('./server/search_get_time_slog_list_by_teacher.js')
 app.get('/search/get_time_slog_list_by_teacher', search_get_time_slog_list_by_teacher)
 
+// 获取学生已选课程列表
+search_student_take_list = require('./server/search_student_take_list.js')
+app.get('/student/take_list', search_student_take_list)
+
+// 查询学生可选开课列表
+search_student_section_list_takable = require('./server/search_student_section_list_takable.js')
+app.get('/student/section_list_takable', search_student_section_list_takable)
+
+// // 学生选课/退选课
+// student_take_untake = require('./server/student_take_untake.js')
+// app.post('/student/take_untake', student_take_untake)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

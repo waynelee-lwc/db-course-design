@@ -152,3 +152,114 @@ body{
     color: gray;
     text-align: center;
 }
+
+.shadow{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0rem;
+    left: 0rem;
+    background: #9aa2bfb0;
+}
+
+.schedule{
+    position: absolute;
+    height: 60rem;
+    width: 70rem;
+    background: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cross{
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    height: 2rem;
+    width: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    /* background: red; */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.cross:hover{
+    background-color: rgb(255, 89, 89);
+    color: white;
+}
+
+.schedule-title{
+    border: 1px solid;
+    position: absolute;
+    width: 90%;
+    height: 5rem;
+    top: 1rem;
+    left: 5%;
+}
+
+.schedule-table{
+    position: absolute;
+    border: 1px solid;
+    height: 42rem;
+    width: 90%;
+    top: 7rem;
+    left: 5%;
+    display: flex;
+}
+
+.schedule-panel{
+    position: absolute;
+    border: 1px solid;
+    height: 8rem;
+    width: 90%;
+    top: 50rem;
+    left: 5%;
+}
+
+.schetab-col{
+    border-right: 1px solid;
+    height: 100%;
+    width: 12.5%;
+    display: flex;
+    flex-direction: column;
+}
+.schetab-row{
+    width: 100%;
+    height: 8.5%;
+    border-bottom: 1px solid;
+}
+
+.schetab-row:hover{
+    background-color: yellow;
+}
+
+.schetab-row-head{
+    background-color: lightgray;
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.schetab-row-blank{
+    /* background-color: lightgray; */
+}
+
+.schetab-row-inuse{
+    background-color: green;
+}
+
+.schetab-row-multi{
+    background-color: red;
+}
+
+.schetab-row-available{
+    background-color: blue;
+}
+
+.schetab-row-unavailable{
+    background-color: orange;
+}

@@ -4,6 +4,14 @@ window.onresize = function(){
 	document.getElementsByTagName('html')[0].style.fontSize = (16/1920) * window.innerWidth + "px";
 }
 
+initCurrTable()
+initHistoryTable()
+refreshView()
+$('.schetab-cell').click(function(e){
+    let id = $(this).attr('id')
+    alert(id)
+})
+
 let address = 'http://60.205.211.19:3011'
 
 $(document).ready(()=>{
@@ -62,3 +70,13 @@ $('.profile-submit').on('click',function(){
         }
     })
 })
+
+$('.cross').click(hideShadow)
+
+function hideShadow(){
+    $('.shadow').hide()
+}
+
+function showShadow(){
+    $('.shadow').show()
+}

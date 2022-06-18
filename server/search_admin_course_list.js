@@ -1,7 +1,7 @@
 var mysql = require('mysql')
 var query = require('../db.js')
 var tool = require('../tool.js')
-async function search_admin_section_list(req, res) {
+async function search_admin_course_list(req, res) {
 	var token = req.headers.token
     var raw_data = tool.token_list[token]
     if (!raw_data) {
@@ -19,25 +19,16 @@ async function search_admin_section_list(req, res) {
         return 
     }
     var data = req.query
-    var sql = ("select * from section join course on course.course_id = section.course_id where 1=1 ")
+    var sql = ("select * from course where 1=1 ")
     
     if(data.dept_name != "")
         sql += mysql.format(" and course.dept_name like ? ", `%${data.dept_name}%`)
 
     if(data.course_name != "")
         sql += mysql.format(" and course.title like ? ", `%${data.course_name}%`)
-    
-    if(data.year != "")
-        sql += mysql.format(" and section.year = ? ", data.year)
 
-    if(data.semester != "")
-        sql += mysql.format(" and section.semester = ? ", data.semester)
-
-    if(data.sec_id != "")
-        sql += mysql.format(" and section.sec_id = ? ", data.sec_id)
-
-    if(data.sec_status != "")
-        sql += mysql.format(" and section.sec_status = ? ", data.sec_status)
+    if(data.course_id != "")
+        sql += mysql.format(" and course.course_id = ? ", data.course_id)
 
     var result = await query(sql)
    	res.send({
@@ -47,4 +38,4 @@ async function search_admin_section_list(req, res) {
    	})
    	return 
 }
-module.exports = search_admin_section_list
+module.exports = search_admin_course_list

@@ -90,6 +90,22 @@ app.get('/teacher/set_score', teacher_set_score)
 search_admin_section_list = require('./server/search_admin_section_list.js')
 app.get('/admin/section_list', search_admin_section_list)
 
+// 管理员查询课程列表
+search_admin_course_list = require('./server/search_admin_course_list.js')
+app.get('/admin/course_list', search_admin_course_list)
+
+// 管理员增加course
+admin_create_course = require('./server/admin_create_course.js')
+app.post('/admin/create_course', admin_create_course)
+
+// 管理员增加section
+admin_create_section = require('./server/admin_create_section.js')
+app.post('/admin/create_section', admin_create_section)
+
+// 管理员修改section
+admin_update_section = require('./server/admin_update_section.js')
+app.post('/admin/update_section', admin_update_section)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

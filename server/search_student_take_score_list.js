@@ -48,7 +48,7 @@ async function search_student_take_score_list(req, res) {
 
     var sql = mysql.format("select * from course_history join course on course.course_id = course_history.course_id where course_history.SID = ? ", raw_data.id)
     var result = await query(sql)
-    console.log(result)
+    // console.log(result)
     for (let i=0; i<result.length; i++) {
         result[i].first_grade = calc_first_grade(result[i].grades)
     }

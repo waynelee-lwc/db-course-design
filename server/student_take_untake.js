@@ -19,17 +19,17 @@ async function search_student_section_list_takable(req, res) {
     }
 
     var data = req.body
-    var sql = mysql.format("select count(*) as count from section where section.sec_id = ? ", data.sec_id)
+    var sql = mysql.format("select count(*) as count from section where section.sec_id = ? and status = 2", data.sec_id)
     var result = await query(sql)
     if(result.length == 0 || result[0].count == 0) {
     	res.send({
-    		"message": "section 不存在",
+    		"message": "不存在开放选课的section",
     		"code": 400
     	})
     	return 
     }
 
-    // sql = mysql.format("select count(*) as count from section join takes ")
+    sql = mysql.format("select count(*) as count from section join takes on ")
    	res.send({
    		"message":"",
    		"code":200,

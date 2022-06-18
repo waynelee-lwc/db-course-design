@@ -7,7 +7,7 @@ function get_role_info(role) {
 	if (role == "teacher") {
 		return ["instructor", "IID"]
 	}
-	else return [null, null]
+	return [null, null]
 }
 
 module.exports = {

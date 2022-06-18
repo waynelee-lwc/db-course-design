@@ -1,8 +1,10 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var multiparty = require('connect-multiparty')
+var cors = require('cors')
 
 let app = express()
+app.use(cors())
 app.use('/',express.static('./static'))
 
 //处理 x-www-form-urlencoded
@@ -31,6 +33,9 @@ app.post('/user/logout',user_logout)
 // 用户修改信息
 user_update_profile = require('./server/user_update_profile.js')
 app.post('/user/update_profile', user_update_profile)
+
+// search_semester_list = require('./server/search_semester_list.js')
+// app.post('/search/semester_list', search_semester_list)
 
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')

@@ -28,7 +28,6 @@ async function user_login(req,res){
 			"message": "用户不存在",
     		"code": 400	
     	})
-    	res.end()
         return 
     }
     result = result[0]

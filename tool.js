@@ -1,4 +1,4 @@
-token_list = {}
+token_list = {"student":{"id":"00128", "role":"student"},"teacher":{"id":"10101", "role":"teacher"}}
 
 function get_role_info(role) {
 	if (role == "student") {

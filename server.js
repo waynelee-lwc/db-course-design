@@ -38,6 +38,18 @@ app.post('/user/update_profile', user_update_profile)
 search_semester_list = require('./server/search_semester_list.js')
 app.get('/search/semester_list', search_semester_list)
 
+// 获取开课计划时间段
+search_get_time_slog_by_sec_id = require('./server/search_get_time_slog_by_sec_id.js')
+app.get('/search/get_time_slog_by_sec_id', search_get_time_slog_by_sec_id)
+
+// 获取学生已选选课时间段
+search_get_time_slog_list_by_student = require('./server/search_get_time_slog_list_by_student.js')
+app.get('/search/get_time_slog_list_by_student', search_get_time_slog_list_by_student)
+
+// 获取教师已选选课时间段
+search_get_time_slog_list_by_teacher = require('./server/search_get_time_slog_list_by_teacher.js')
+app.get('/search/get_time_slog_list_by_teacher', search_get_time_slog_list_by_teacher)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

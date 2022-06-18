@@ -163,6 +163,7 @@ body{
 }
 
 .schedule{
+    border: 4px double;
     position: absolute;
     height: 60rem;
     width: 70rem;
@@ -192,7 +193,7 @@ body{
 }
 
 .schedule-title{
-    border: 1px solid;
+    /* border: 1px solid; */
     position: absolute;
     width: 90%;
     height: 5rem;
@@ -202,8 +203,8 @@ body{
 
 .schedule-table{
     position: absolute;
-    border: 1px solid;
-    height: 42rem;
+    /* border: 1px solid; */
+    height: 48rem;
     width: 90%;
     top: 7rem;
     left: 5%;
@@ -212,11 +213,14 @@ body{
 
 .schedule-panel{
     position: absolute;
-    border: 1px solid;
-    height: 8rem;
+    /* border: 1px solid; */
+    height: 3rem;
     width: 90%;
-    top: 50rem;
+    top: 56rem;
     left: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .schetab-col{
@@ -262,4 +266,55 @@ body{
 
 .schetab-row-unavailable{
     background-color: orange;
+}
+
+.schedule-title .name{
+    position: absolute;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.schedule-title .teachers{
+    position: absolute;
+    top: 3rem;
+    left: 9rem;
+    font-weight: bold;
+}
+.schedule-title .type{
+    position: absolute;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.schedule-title .dept{
+    position: absolute;
+    top: 3rem;
+    left: 2rem;
+    font-weight: bold;
+}
+.schedule-title .semester{
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    font-weight: bold;
+}
+
+.schedule-panel div{
+    font-size: 1.5rem;
+}
+
+.schedule-panel .begin-week{
+    
+}
+.schedule-panel .end-week{
+    
+}
+.schedule-panel .building{
+    
+}
+.schedule-panel .classroom{
+    
+}
+.schedule-panel .show-history{
+    
 }

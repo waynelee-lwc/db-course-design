@@ -29,10 +29,10 @@ $(document).ready(()=>{
 
     //选课列表
     reloadTakable()
-    //已选课程time slot
-    loadSchedule()
     //分数
     loadGrades()
+    //已选课程time slot
+    loadSchedule()
     
 })
 
@@ -115,7 +115,7 @@ function loadGrades(){
                         <tr>
                             <td>${course.course_id}</td>
                             <td>${course.title}</td>
-                            <td>${course.type}</td>
+                            <td>${course.course_type}</td>
                             <td>${course.dept_name}</td>
                             <td>${course.credits}</td>
                             <td>${course.first_grade}</td>
@@ -128,6 +128,7 @@ function loadGrades(){
     })
 }
 
+let takable = []
 function reloadTakable(){
     
     let course_name = $('.course_name input').val()
@@ -155,20 +156,22 @@ function reloadTakable(){
             if(res.code != 200){
                 alert('表单加载错误！')
             }else{
+                takable = res.data
                 $('.section-table tbody').empty()
-                for(let sec of res.data){
+                for(let idx in res.data){
+                    sec = res.data[idx]
                     $('.section-table tbody').append(
                         $(`
                         <tr>
                             <td>${sec.course_id}</td>
                             <td>${sec.sec_id}</td>
                             <td>${sec.title}</td>
-                            <td>${sec.type}</td>
+                            <td>${sec.course_type}</td>
                             <td>${sec.dept_name}</td>
                             <td>${sec.credits}</td>
                             <td>${sec.year} ${sec.semester}</td>
                             <td>${sec.teacher_names}</td>
-                            <td><button class="btn btn-primary check-schedule" id="schedule-${sec.sec_id}">查看</button></td>
+                            <td><button class="btn btn-primary check-schedule" id="${idx}-${sec.sec_id}">查看</button></td>
                             <td><button class="btn btn-${sec.SID ? 'success' : 'danger'} take-untake" id="${sec.SID ? 'untake' : 'take'}-${sec.sec_id}">${sec.SID ? '退选' : '选课'}</button></td>
                         </tr>
                         `)
@@ -200,8 +203,9 @@ function takeUntake(){
             if(res.code != 200){
                 alert(res.message)
             }else{
-                alert(operation == 'take' ? '选课成功!' : '退选成功!')
                 reloadTakable()
+                loadSchedule()
+                alert(operation == 'take' ? '选课成功!' : '退选成功!')
             }
         }
     })
@@ -210,6 +214,9 @@ function takeUntake(){
 function checkSchedule(){
     let id = $(this).attr('id')
     let sec_id = id.split('-')[1]
+    let idx = id.split('-')[0]
+    sec = takable[idx]
+    console.log(sec)
 
     $.ajax({
         url:`${address}/search/get_time_slog_by_sec_id`,
@@ -218,11 +225,53 @@ function checkSchedule(){
             sec_id:sec_id
         },
         success:function(res){
-            table = parseSchedule(res.data.timeSlot)
+            timeslot = res.data.timeSlot
+            table = parseSchedule(timeslot)
             setCurrTable(table)
             initHistoryTable(table)
             refreshView()
             showShadow()
+
+            $('.schedule-title').empty()
+            $('.schedule-title').append($(`
+                <div class="name">${sec.title}</div>
+                <div class="teachers">${sec.teacher_names}</div>
+                <div class="type">${sec.course_type}</div>
+                <div class="dept">${sec.dept_name}</div>
+                <div class="semester">${sec.year} ${sec.semester}</div>
+            `))
+
+            $('.schedule-panel').empty()
+            $('.schedule-panel').append($(`
+                <div class="begin-week">从第<b>${timeslot.begin_week}</b>周开始</div>
+                <div class="end-week">到第<b>${timeslot.end_week}</b>周结束</div>
+                <div class="building">教学楼:<b>${sec.building}</b></div>
+                <div class="classroom">教室:<b>${sec.room_number}</b></div>
+                <button class="btn btn-primary show-history">展示已选课程</button>
+            `))
+            $('.show-history').click(loadHistory)
         }
     })
+}
+
+function loadHistory(){
+    let val = $(this).text()
+    if(val == '展示已选课程'){
+        initHistoryTable()
+        for(sec of historyTakes){
+            table = parseSchedule(sec)
+            for(let i = 1;i <= 7;i++){
+                for(let j = 1;j <= 11;j++){
+                    historyTable[i][j] += table[i][j]
+                }
+            }
+        }
+        refreshView()
+        $(this).text('隐藏已选课程')
+    }else{
+        initHistoryTable()
+        refreshView()
+        $(this).text('展示已选课程')
+    }
+    
 }

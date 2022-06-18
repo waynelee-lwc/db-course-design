@@ -23,8 +23,7 @@ async function admin_update_section(req, res) {
     var result = await query(sql)
    	res.send({
    		"message":"",
-   		"code":200,
-   		"data": result
+   		"code":200
    	})
    	return 
 }

@@ -70,9 +70,13 @@ app.get('/student/take_score_list', search_student_take_score_list)
 teacher_take_untake = require('./server/teacher_take_untake.js')
 app.post('/teacher/take_untake', teacher_take_untake)
 
-// 教师教课成绩列表
+// 教师教课成绩列表(单个)
 search_teacher_take_score_list = require('./server/search_teacher_take_score_list.js')
 app.get('/teacher/take_score_list', search_teacher_take_score_list)
+
+// 教师教课成绩列表(所有)
+search_teacher_get_score_list = require('./server/search_teacher_get_score_list.js')
+app.get('/teacher/get_score_list', search_teacher_get_score_list)
 
 // 查询教师可选开课列表
 search_teacher_section_list_takable = require('./server/search_teacher_section_list_takable.js')
@@ -105,6 +109,7 @@ app.post('/admin/create_section', admin_create_section)
 // 管理员修改section
 admin_update_section = require('./server/admin_update_section.js')
 app.post('/admin/update_section', admin_update_section)
+
 
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')

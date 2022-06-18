@@ -18,13 +18,12 @@ async function admin_create_course(req, res) {
     	})
         return 
     }
-    var data = req.query
-    var sql = ("select * from course where 1=1 ")
+    var data = req.body
+    var sql = mysql.format("insert into course(course_id, title, dept_name, credits, course_type) VALUES (?,?,?,?,?)",[data.course_id, data.title, data.dept_name, data.credits, data.course_type])
     var result = await query(sql)
    	res.send({
    		"message":"",
-   		"code":200,
-   		"data": result
+   		"code":200
    	})
    	return 
 }

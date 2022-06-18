@@ -165,3 +165,107 @@
 .schedule-panel .show-history{
     
 }
+
+.grade{
+    border: 4px double;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 50rem;
+    width: 30rem;
+    background: white;
+}
+
+.grade-title{
+    /* border: 1px solid; */
+    position: absolute;
+    width: 90%;
+    height: 5rem;
+    top: 1rem;
+    left: 5%;
+}
+
+.grade-table{
+    position: absolute;
+    height: 36rem;
+    width: 90%;
+    top: 7rem;
+    left: 5%;
+    border-top: 3px double;
+    border-bottom: 3px double;
+}
+
+.grade-panel{
+    position: absolute;
+    /* border: 1px solid; */
+    height: 5rem;
+    width: 90%;
+    top: 44rem;
+    left: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.grade-title .name{
+    position: absolute;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.grade-title .teachers{
+    position: absolute;
+    top: 3rem;
+    left: 9rem;
+    font-weight: bold;
+}
+.grade-title .type{
+    position: absolute;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.grade-title .dept{
+    position: absolute;
+    top: 3rem;
+    left: 2rem;
+    font-weight: bold;
+}
+.grade-title .semester{
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    font-weight: bold;
+}
+
+.grade-panel div{
+    font-size: 1.5rem;
+}
+
+.grade-panel .begin-week{
+    
+}
+.grade-panel .end-week{
+    
+}
+.grade-panel .building{
+    
+}
+.grade-panel .classroom{
+    
+}
+.grade-panel .show-history{
+    
+}
+
+.grade-table input{
+    width: 3rem;
+}
+
+.grade-table button{
+    width: 4rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+}

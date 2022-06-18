@@ -21,6 +21,7 @@ $(document).ready(()=>{
     reloadTakable()
     //历史任课
     loadSchedule()
+    //
 })
 
 $('.profile-submit').on('click',function(){
@@ -74,10 +75,12 @@ $('.search-submit').on('click',function (){
 
 function hideShadow(){
     $('.shadow').hide()
+    $('.schedule').hide()
 }
 
 function showShadow(){
     $('.shadow').show()
+    $('.schedule').show()
 }
 
 let historyTakes = []

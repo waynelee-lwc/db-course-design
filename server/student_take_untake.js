@@ -18,8 +18,7 @@ async function search_student_section_list_takable(req, res) {
     	})
     }
     var data = req.query
-    var sql = "select * from section join course on section.course_id = course.course_id join (select sec_id, group_concat(instructor.name) as teacher_names from teaches join instructor on teaches.IID = instructor.IID group by teaches.sec_id) as a on section.sec_id = a.sec_id where section.status = 2 "
-
+    var sql = "select * from "
     var result = await query(sql)
    	res.send({
    		"message":"",

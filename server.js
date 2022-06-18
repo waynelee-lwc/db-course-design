@@ -58,9 +58,9 @@ app.get('/student/take_list', search_student_take_list)
 search_student_section_list_takable = require('./server/search_student_section_list_takable.js')
 app.get('/student/section_list_takable', search_student_section_list_takable)
 
-// // 学生选课/退选课
-// student_take_untake = require('./server/student_take_untake.js')
-// app.post('/student/take_untake', student_take_untake)
+// 学生选课/退选课
+student_take_untake = require('./server/student_take_untake.js')
+app.post('/student/take_untake', student_take_untake)
 
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')

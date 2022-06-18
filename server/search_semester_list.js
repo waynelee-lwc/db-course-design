@@ -1,14 +1,14 @@
 var tool = require('../tool.js')
 function search_semester_list(req, res) {
 	let list = []
-	for(let i=2010;i<=2022;i++)
+	for(let i=2022;i>=2010;i--)
 	{
 		list.push({
-			"semester":"Spring",
+			"semester":"Fall",
 			"year":i
 		})
 		list.push({
-			"semester":"Fall",
+			"semester":"Spring",
 			"year":i
 		})
 	}

@@ -1,4 +1,17 @@
-token_list = {"student":{"id":"00128", "role":"student"},"teacher":{"id":"10101", "role":"teacher"}}
+token_list = {
+	"student": {
+		"id":"00128", 
+		"role":"student"
+	},
+	"teacher": {
+		"id":"10101", 
+		"role":"teacher"
+	},
+	"admin": {
+		"id":"123",
+		"role":"admin"
+	}
+}
 
 function get_role_info(role) {
 	if (role == "student") {
@@ -6,6 +19,9 @@ function get_role_info(role) {
 	}
 	if (role == "teacher") {
 		return ["instructor", "IID"]
+	}
+	if (role == "admin") {
+		return ["admin", "AID"]
 	}
 	return [null, null]
 }

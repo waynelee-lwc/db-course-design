@@ -17,7 +17,7 @@ async function search_student_take_list(req, res) {
             "code": 400
     	})
     }
-    var sql = mysql.format("select * from takes join section on takes.sec_id = section.sec_id where takes.SID = ? and section.status = ?", [raw_data.id, 2])
+    var sql = mysql.format("select * from takes join section on takes.sec_id = section.sec_id join time_slot on section.time_slot_id = time_slot.time_slot_id where takes.SID = ? and section.status in (?,?)", [raw_data.id, 2, 3])
     var result = await query(sql)
    	res.send({
    		"message":"",

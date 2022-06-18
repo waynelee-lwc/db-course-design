@@ -88,7 +88,7 @@ app.get('/teacher/take_list', search_teacher_take_list)
 
 // 教师登录学生成绩
 teacher_set_score = require('./server/teacher_set_score.js')
-app.get('/teacher/set_score', teacher_set_score)
+app.post('/teacher/set_score', teacher_set_score)
 
 // 管理员查询开课列表
 search_admin_section_list = require('./server/search_admin_section_list.js')

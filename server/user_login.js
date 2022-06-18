@@ -5,17 +5,18 @@ const random_string = require('string-random')
 
 async function user_login(req,res){
     var data = req.body
-    console.log(data)
-    var table = "", sql = ""
-    if(data.role == "student") {
-    	sql = mysql.format('select * from student where SID = ?', data.id)
-    	table = "student"
-    } else if(data.role == "teacher") {
-    	sql = mysql.format('select * from instructor where IID = ?', data.id)
-    	table = "instructor"
-    } else {
-    	res.end("error role")
+    var role_info = tool.get_role_info(data.role)
+    var table = role_info[0], table_id = role_info[1]
+    if (table == null) {
+    	res.send({
+            "message": "角色不存在",
+            "code": 400
+        })
+        res.end()
+        return
     }
+
+    var sql = mysql.format('select * from ' +  table + ' where ' + table_id + ' = ?',data.id)
     var result = await query(sql)
     var resp = {
     	"message": "",
@@ -28,14 +29,16 @@ async function user_login(req,res){
     		"code": 400	
     	})
     	res.end()
+        return 
     }
     result = result[0]
-    if(result.passward != data.passward) {
+    if(result.password != data.password) {
         res.send({
 			"message": "密码错误",
     		"code": 400	
     	})
     	res.end()	
+        return
     }
 
     let token = random_string(16)
@@ -44,6 +47,7 @@ async function user_login(req,res){
     	"role": data.role,
     	"id": data.id
     }
+    result.password = ""
     res.send({
     	"message": null,
     	"code": 200,
@@ -53,5 +57,6 @@ async function user_login(req,res){
     	}
     })
    	res.end()
+    return 
 }
 module.exports = user_login

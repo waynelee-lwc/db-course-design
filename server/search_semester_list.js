@@ -13,7 +13,10 @@ function search_semester_list(req, res) {
 		})
 	}
 	res.send({
-		""
+		"message":"",
+		"code": 200,
+		"semesterList":list 
 	})
 	return 
 }
+module.exports = search_semester_list

@@ -34,9 +34,9 @@ app.post('/user/logout',user_logout)
 user_update_profile = require('./server/user_update_profile.js')
 app.post('/user/update_profile', user_update_profile)
 
-// // 获取开课学期
-// search_semester_list = require('./server/search_semester_list.js')
-// app.post('/search/semester_list', search_semester_list)
+// 获取开课学期
+search_semester_list = require('./server/search_semester_list.js')
+app.get('/search/semester_list', search_semester_list)
 
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')

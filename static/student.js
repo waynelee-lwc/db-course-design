@@ -33,6 +33,8 @@ $(document).ready(()=>{
     loadGrades()
     //已选课程time slot
     loadSchedule()
+    //学期列表
+    loadSemesters()
     
 })
 
@@ -82,7 +84,8 @@ function loadSchedule(){
         url:`${address}/student/take_list`,
         type:'get',
         headers:{
-            token:'student'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'student'
         },
         success:function(res){
             historyTakes = res.data
@@ -103,7 +106,8 @@ function loadGrades(){
         url:`${address}/student/take_score_list`,
         type:'get',
         headers:{
-            token:'student'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'student'
         },
         success:function(res){
             if(res.code != 200){
@@ -134,22 +138,24 @@ function reloadTakable(){
     let course_name = $('.course_name input').val()
     let dept_name = $('.dept_name input').val()
     let teacher_name = $('.teacher_name input').val()
-    let semester = $('.semester input').val()
+    let semester = $('.semester select').val()
+    let year = semester.split('-')[0]
+    semester = semester.split('-')[1]
 
     //学生可选课程列表
     $.ajax({
         url:`${address}/student/section_list_takable`,
         type:'get',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'student'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'student'
         },
         data:{
             course_name:course_name,
             teacher_name:teacher_name,
             dept_name:dept_name,
-            year:'',
-            semester:''  
+            year:year,
+            semester:semester  
         },
         success:function(res){
             // console.log(res)
@@ -192,8 +198,8 @@ function takeUntake(){
         url:`${address}/student/take_untake`,
         type:'post',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'student'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'student'
         },
         data:{
             operation:operation,
@@ -274,4 +280,21 @@ function loadHistory(){
         $(this).text('展示已选课程')
     }
     
+}
+
+function loadSemesters(){
+    $.ajax({
+        url:`${address}/search/semester_list`,
+        type:'get',
+        success:function(res){
+            semesterList = res.semesterList
+            $('.semester select').empty()
+            $('.semester select').append($(`<option value="-" selected>开课学期</option>`))
+            for(let semester of semesterList){
+                $('.semester select').append($(`
+                    <option value="${semester.year}-${semester.semester}">${semester.year} ${semester.semester}</option>
+                `))
+            }
+        }
+    })
 }

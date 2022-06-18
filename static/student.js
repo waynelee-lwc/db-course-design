@@ -16,12 +16,6 @@ let address = 'http://60.205.211.19:3011'
 
 $(document).ready(()=>{
     
-    // let user ={
-    //     name:'大明明',
-    //     dept_name:'环境工程',
-    //     email:'123456789@jlu.edu.cn',
-    //     phone:'12345678901'
-    // }
     let user = JSON.parse(localStorage.getItem('userinfo'))
 
 
@@ -33,8 +27,12 @@ $(document).ready(()=>{
     $('.phone input').val(user.phone)
     $('.email input').val(user.email)
 
+    //选课列表
     reloadTakable()
-    hideShadow()
+    //已选课程time slot
+    loadSchedule()
+    //分数
+    loadGrades()
     
 })
 
@@ -77,12 +75,57 @@ $('.profile-submit').on('click',function(){
 $('.cross').click(hideShadow)
 $('.search-submit').click(reloadTakable)
 
+
+let historyTakes = []
+function loadSchedule(){
+    $.ajax({
+        url:`${address}/student/take_list`,
+        type:'get',
+        headers:{
+            token:'student'
+        },
+        success:function(res){
+            historyTakes = res.data
+        }
+    })
+}
+
 function hideShadow(){
     $('.shadow').hide()
 }
 
 function showShadow(){
     $('.shadow').show()
+}
+
+function loadGrades(){
+    $.ajax({
+        url:`${address}/student/take_score_list`,
+        type:'get',
+        headers:{
+            token:'student'
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert('获取成绩失败!' + res.message)
+            }else{
+                $('.score-table tbody').empty()
+                for(let course of res.data){
+                    $('.score-table tbody').append($(`
+                        <tr>
+                            <td>${course.course_id}</td>
+                            <td>${course.title}</td>
+                            <td>${course.type}</td>
+                            <td>${course.dept_name}</td>
+                            <td>${course.credits}</td>
+                            <td>${course.first_grade}</td>
+                            <td>${course.max_grade}</td>
+                        </tr>
+                    `))
+                }
+            }
+        }
+    })
 }
 
 function reloadTakable(){
@@ -108,7 +151,7 @@ function reloadTakable(){
             semester:''  
         },
         success:function(res){
-            console.log(res)
+            // console.log(res)
             if(res.code != 200){
                 alert('表单加载错误！')
             }else{
@@ -125,38 +168,61 @@ function reloadTakable(){
                             <td>${sec.credits}</td>
                             <td>${sec.year} ${sec.semester}</td>
                             <td>${sec.teacher_names}</td>
-                            <td><button class="btn btn-primary" id="schedule-${sec.sec_id}">查看</button></td>
+                            <td><button class="btn btn-primary check-schedule" id="schedule-${sec.sec_id}">查看</button></td>
                             <td><button class="btn btn-${sec.SID ? 'success' : 'danger'} take-untake" id="${sec.SID ? 'untake' : 'take'}-${sec.sec_id}">${sec.SID ? '退选' : '选课'}</button></td>
                         </tr>
                         `)
                     )
                 }
             }
-            $('.take-untake').click(function(){
-                id = $(this).attr('id')
-                operation = id.split('-')[0]
-                sec_id = id.split('-')[1]
-                $.ajax({
-                    url:`${address}/student/take_untake`,
-                    type:'post',
-                    headers:{
-                        // token:JSON.parse(localStorage.getItem('token'))
-                        token:'student'
-                    },
-                    data:{
-                        operation:operation,
-                        sec_id:sec_id
-                    },
-                    success:function(res){
-                        if(res.code != 200){
-                            alert(res.message)
-                        }else{
-                            alert(operation == 'take' ? '选课成功!' : '退选成功!')
-                            reloadTakable()
-                        }
-                    }
-                })
-            })
+            $('.take-untake').click(takeUntake)
+            $('.check-schedule').click(checkSchedule)
+        }
+    })
+}
+
+function takeUntake(){
+    id = $(this).attr('id')
+    operation = id.split('-')[0]
+    sec_id = id.split('-')[1]
+    $.ajax({
+        url:`${address}/student/take_untake`,
+        type:'post',
+        headers:{
+            // token:JSON.parse(localStorage.getItem('token'))
+            token:'student'
+        },
+        data:{
+            operation:operation,
+            sec_id:sec_id
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                alert(operation == 'take' ? '选课成功!' : '退选成功!')
+                reloadTakable()
+            }
+        }
+    })
+}
+
+function checkSchedule(){
+    let id = $(this).attr('id')
+    let sec_id = id.split('-')[1]
+
+    $.ajax({
+        url:`${address}/search/get_time_slog_by_sec_id`,
+        type:'get',
+        data:{
+            sec_id:sec_id
+        },
+        success:function(res){
+            table = parseSchedule(res.data.timeSlot)
+            setCurrTable(table)
+            initHistoryTable(table)
+            refreshView()
+            showShadow()
         }
     })
 }

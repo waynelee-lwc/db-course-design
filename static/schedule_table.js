@@ -62,3 +62,29 @@ function refreshView(){
         $('.schedule-table').append(col)
     }
 }
+
+function parseSchedule(schedule){
+    console.log(schedule)
+    let res = []
+    let keys = ['','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+    for(let i = 1;i <= 7;i++){
+        key = keys[i]
+        val = schedule[key]
+        res[i] = []
+        for(let j = 1;j <= 11;j++){
+            v = val[j]
+            res[i][j] = Number.parseInt(v)
+        }
+    }
+    console.log(res)
+    return res
+}
+
+function setCurrTable(table){
+    initCurrTable()
+    for(let i = 1;i <= 7;i++){
+        for(let j = 1;j <= 11;j++){
+            currTable[i][j] += table[i][j]
+        }
+    }
+}

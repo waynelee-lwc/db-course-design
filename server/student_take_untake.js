@@ -17,9 +17,19 @@ async function search_student_section_list_takable(req, res) {
             "code": 400
     	})
     }
-    var data = req.query
-    var sql = "select * from "
+
+    var data = req.body
+    var sql = mysql.format("select count(*) as count from section where section.sec_id = ? ", data.sec_id)
     var result = await query(sql)
+    if(result.length == 0 || result[0].count == 0) {
+    	res.send({
+    		"message": "section 不存在",
+    		"code": 400
+    	})
+    	return 
+    }
+
+    // sql = mysql.format("select count(*) as count from section join takes ")
    	res.send({
    		"message":"",
    		"code":200,

@@ -21,6 +21,7 @@ async function search_teacher_take_score_list(req, res) {
 
     var data = req.query 
     var sql = mysql.format("select * from takes join section on section.sec_id = takes.sec_id join student on student.SID = takes.SID where section.sec_id = ? ", data.sec_id)
+    // console.log(sql)
     var result = await query(sql)
     res.send({
         "message": "", 

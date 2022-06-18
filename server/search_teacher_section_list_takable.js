@@ -20,8 +20,25 @@ async function search_teacher_section_list_takable(req, res) {
     }
 
     var data = req.query 
-    var sql = mysql.format("select * from section join course on course.course_id = section.course_id left join teaches on teaches.sec_id = section.sec_id and teaches.sec_id = ? where section.status = 1 ", raw_data.id)
-    // console.log(sql)
+    var sql = mysql.format("select * from section join course on course.course_id = section.course_id left join (select IID , sec_id as teaches_sec_id from teaches) as b on section.sec_id = b.teaches_sec_id and b.IID = ? where section.status = 1 ", raw_data.id)
+    // course_name, dept_name, year, semester, sec_id 
+
+    if(data.dept_name != "")
+        sql += mysql.format(" and course.dept_name like ? ", `%${data.dept_name}%`)
+
+    if(data.course_name != "")
+        sql += mysql.format(" and course.title like ? ", `%${data.course_name}%`)
+    
+    if(data.year != "")
+        sql += mysql.format(" and section.year = ? ", data.year)
+
+    if(data.semester != "")
+        sql += mysql.format(" and section.semester = ? ", data.semester)
+
+    if(data.sec_id != "")
+        sql += mysql.format(" and section.sec_id = ? ", data.sec_id)
+    
+    console.log(sql)
     var result = await query(sql)
     res.send({
         "message": "", 

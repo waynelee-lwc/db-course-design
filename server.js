@@ -89,6 +89,7 @@ app.get('/teacher/set_score', teacher_set_score)
 // 管理员查询开课列表
 search_admin_section_list = require('./server/search_admin_section_list.js')
 app.get('/admin/section_list', search_admin_section_list)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

@@ -19,7 +19,7 @@ async function search_student_section_list_takable(req, res) {
     }
 
     var data = req.query
-    var sql = mysql.format("select * from section join course on section.course_id = course.course_id join (select sec_id, group_concat(instructor.name) as teacher_names from teaches join instructor on teaches.IID = instructor.IID group by teaches.sec_id) as a on section.sec_id = a.sec_id left join takes on section.sec_id = takes.sec_id and takes.SID = ? where section.status = 2", raw_data.id)
+    var sql = mysql.format("select * from section join course on section.course_id = course.course_id join (select sec_id, group_concat(instructor.name) as teacher_names from teaches join instructor on teaches.IID = instructor.IID group by teaches.sec_id) as a on section.sec_id = a.sec_id left join (select SID , sec_id as takes_sec_id, grade from takes) as b on section.sec_id = b.takes_sec_id and b.SID = ? where section.status = 2", raw_data.id)
 
     if(data.dept_name != "")
         sql += mysql.format(" and course.dept_name like ? ", `%${data.dept_name}%`)
@@ -38,6 +38,7 @@ async function search_student_section_list_takable(req, res) {
 
     console.log(sql)
     var result = await query(sql)
+    console.log(result)
    	res.send({
    		"message":"",
    		"code":200,

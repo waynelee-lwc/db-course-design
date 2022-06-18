@@ -62,6 +62,10 @@ app.get('/student/section_list_takable', search_student_section_list_takable)
 student_take_untake = require('./server/student_take_untake.js')
 app.post('/student/take_untake', student_take_untake)
 
+// // 学生选课成绩列表
+// search_take_score_list = require('./server/search_take_score_list.js')
+// app.get('/search/take_score_list', search_take_score_list)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

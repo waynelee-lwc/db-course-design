@@ -73,6 +73,19 @@ app.post('/teacher/take_untake', teacher_take_untake)
 // 教师教课成绩列表
 search_teacher_take_score_list = require('./server/search_teacher_take_score_list.js')
 app.get('/teacher/take_score_list', search_teacher_take_score_list)
+
+// 查询教师可选开课列表
+search_teacher_section_list_takable = require('./server/search_teacher_section_list_takable.js')
+app.get('/teacher/section_list_takable', search_teacher_section_list_takable)
+
+// 获取教师已选课程列表
+search_teacher_take_list = require('./server/search_teacher_take_list.js')
+app.get('/teacher/take_list', search_teacher_take_list)
+
+// 教师登录学生成绩
+teacher_set_score = require('./server/teacher_set_score.js')
+app.get('/teacher/set_score', teacher_set_score)
+
 let server = app.listen(3011,()=>{
     console.log('The server is listening on port : 3011')
 })

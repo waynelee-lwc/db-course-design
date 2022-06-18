@@ -30,14 +30,6 @@ async function user_update_profile(req,res) {
 		sql = mysql.format('update ' +  table + ' set phone = ?, email = ?, password = ? where ' + table_id + ' = ?',
     	[data.phone, data.email, data.password, raw_data.id])
 	var result = await query(sql)
-	// if (result) {
-	// 	res.send({
- //            "message": result,
- //            "code": 400
- //        })
- //        return
-	// }
-
 	sql = mysql.format('select * from ' +  table + ' where ' + table_id + ' = ?',raw_data.id)
     result = await query(sql)
     if(result.length == 0) {

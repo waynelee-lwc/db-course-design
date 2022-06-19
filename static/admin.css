@@ -93,13 +93,15 @@ body{
     margin-top: 3%;
 }
 
-.search-bar{
+.search-bar,
+.create-course{
     width: 100%;
     height: 10%;
     border-top: 1px solid;
 }
 
-.search-bar-wrapper{
+.search-bar-wrapper,
+.create-course-wrapper{
     height: 65%;
     width: 100%;
     display: flex;
@@ -131,22 +133,22 @@ body{
 }
 
 .section-table table,
-.score-table table{
+.course-table table{
     text-align: center;
 }
 
-.score-table{
+.course-table{
     width: 100%;
-    height: 45%;
+    height: 40%;
     overflow: auto;
-    margin-top: 5%;
     border-bottom: 4px double;
     border-top: 1px solid;
 }
 
 .section-table .title,
-.score-table .title,
-.search-bar .title{
+.course-table .title,
+.search-bar .title,
+.create-course .title{
     font-size: 1.25rem;
     color: gray;
     text-align: center;

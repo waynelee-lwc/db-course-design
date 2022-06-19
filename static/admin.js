@@ -68,8 +68,44 @@ $('.profile-submit').on('click',function(){
 })
 
 $('.search-submit').click(loadSectionList)
+$('.create-course-submit').click(createCourse)
 
 
+function createCourse(){
+    let course_id = $('.create_course_id input').val()
+    let course_name = $('.create_course_name input').val()
+    let dept_name = $('.create_dept_name select').val()
+    let credits = $('.create_credits select').val()
+    let course_type = $('.create_course_type select').val()
+
+    if(!dept_name || !credits || !course_type){
+        alert('请完整填写！')
+    }
+
+    $.ajax({
+        url:`${address}/admin/create_course`,
+        headers:{
+            // token:JSON.parse(localStorage.getItem('token'))
+            token:'admin'
+        },
+        type:'post',
+        data:{
+            course_id:course_id,
+            title:course_name,
+            dept_name:dept_name,
+            credits:credits,
+            course_type:course_type
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                alert('添加成功!')
+                loadCourseList()
+            }
+        }
+    })
+}
 
 let sectionList = []
 function loadSectionList(){
@@ -199,4 +235,8 @@ function loadCourseList(){
             }
         }
     })
+}
+
+function createSection(){
+
 }

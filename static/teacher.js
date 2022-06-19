@@ -21,7 +21,10 @@ $(document).ready(()=>{
     reloadTakable()
     //历史任课
     loadSchedule()
-    //
+    //登分列表
+    loadScoreList()
+    //学期列表
+    loadSemesters()
 })
 
 $('.profile-submit').on('click',function(){
@@ -64,23 +67,145 @@ $('.profile-submit').on('click',function(){
 $('.cross').click(hideShadow)
 $('.search-submit').click(reloadTakable)
 
-$('.search-submit').on('click',function (){
-    let course_id=$('.course_id input').val();
-    let dept_name=$('.dept_name input').val();
-    let semester=$('.semester input').val();
-    let status=$('.status select').val();
-    alert('cid ' + course_id + '\ndeptname ' + dept_name + '\nsemester ' + semester + '\nstatus ' + status)
-})
+$('.search-submit').on('click',reloadTakable)
 
+let scoreList = []
+function loadScoreList(){
+    $.ajax({
+        url:`${address}/teacher/get_score_list`,
+        type:'get',
+        headers:{
+            token:'teacher'
+        },
+        success:function(res){
+            console.log(res)
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                scoreList = res.data
+                $('.score-table tbody').empty()
+                for(let idx in res.data){
+                    sec = res.data[idx]
+                    $('.score-table tbody').append(
+                        $(`
+                        <tr>
+                            <td>${sec.course_id}</td>
+                            <td>${sec.sec_id}</td>
+                            <td>${sec.title}</td>
+                            <td>${sec.course_type}</td>
+                            <td>${sec.dept_name}</td>
+                            <td>${sec.credits}</td>
+                            <td>${sec.year} ${sec.semester}</td>
+                            <td>${sec.status == 4 ? '可登分' : '已结束'}</td>
+                            <td><button class="btn btn-${sec.status == 4 ? 'success' : 'danger'} set-grade" id="${idx}-${sec.sec_id}">${sec.status == 4 ? '登分' : '查分'}</button></td>
+                        </tr>
+                        `)
+                    )
+                }
+                $('.set-grade').click(setGrade)
+            }
+        }
+    })
+}
+
+function setGrade(){
+    let id = $(this).attr('id')
+    let idx = id.split('-')[0]
+    let sec_id = id.split('-')[1]
+    let sec = scoreList[idx]
+
+    $('.grade-title').empty()
+    $('.grade-title').append($(`
+        <div class="name">${sec.title}</div>
+        <div class="type">${sec.course_type}</div>
+        <div class="dept">${sec.dept_name}</div>
+        <div class="semester">${sec.year} ${sec.semester}</div>
+    `))
+
+    $('.grade-panel').empty()
+    $('.grade-panel').append($(`
+        <div class="building">教学楼:<b>${sec.building}</b></div>
+        <div class="classroom">教室:<b>${sec.room_number}</b></div>
+    `))
+
+    loadGradeList(sec,sec_id)
+}
+
+function loadGradeList(sec,sec_id){
+    $.ajax({
+        url:`${address}/teacher/take_score_list`,
+        type:'get',
+        headers:{
+            token:'teacher'
+        },
+        data:{
+            sec_id:sec_id
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                console.log(res.data)
+                $('.grade-table tbody').empty()
+                for(student of res.data){
+                    $('.grade-table tbody').append($(`
+                        <tr>
+                            <td>${student.SID}</td>
+                            <td>${student.name}</td>
+                            <td><input type="number" value="${Number.parseInt(student.grade)}" id="grade-${sec_id}-${student.SID}"></td>
+                            <td><button class="btn btn-primary upload-score" ${sec.status == 4 ? '' : 'disabled'} id="${sec_id}-${student.SID}">修改</button></td>
+                        </tr>
+                    `))
+                }
+                hideShadow()
+                showGrade()
+                $('.upload-score').click(setStudentGrade)
+            }
+        }
+    })
+}
 
 function hideShadow(){
     $('.shadow').hide()
     $('.schedule').hide()
 }
 
-function showShadow(){
+function showSchedule(){
     $('.shadow').show()
     $('.schedule').show()
+}
+
+function showGrade(){
+    $('.shadow').show()
+    $('.grade').show()
+}
+
+function setStudentGrade(){
+    let id = $(this).attr('id')
+    let sec_id = id.split('-')[0]
+    let SID = id.split('-')[1]
+    let grade = $(`#grade-${sec_id}-${SID}`).val()
+
+    $.ajax({
+        url:`${address}/teacher/set_score`,
+        type:'post',
+        data:{
+            sec_id:sec_id,
+            SID:SID,
+            grade:grade
+        },
+        headers:{
+            token:'teacher'
+        },
+        success:function(res){
+            if(res.code == 200){
+                alert('录入成绩成功!')
+                loadGradeList()
+            }else{
+                alert(res.message)
+            }
+        }
+    })
 }
 
 let historyTakes = []
@@ -101,12 +226,13 @@ function loadSchedule(){
 let takable = []
 function reloadTakable(){
     
-    // let course_name = $('.course_name input').val()
-    // let dept_name = $('.dept_name input').val()
-    // let teacher_name = $('.teacher_name input').val()
-    // let semester = $('.semester select').val()
-    // let year = semester.split('-')[0]
-    // semester = semester.split('-')[1]
+    let course_name = $('.course_name input').val()
+    let dept_name = $('.dept_name input').val()
+    let sec_id = $('.sec_id input').val()
+    let semester = $('.semester select').val()
+    let year = semester.split('-')[0]
+    semester = semester.split('-')[1]
+
 
     //学生可选课程列表
     $.ajax({
@@ -117,11 +243,11 @@ function reloadTakable(){
             token:'teacher'
         },
         data:{
-            sec_id:'',
-            course_name:'',
-            dept_name:'',
-            year:'',
-            semester:''
+            sec_id:sec_id,
+            course_name:course_name,
+            dept_name:dept_name,
+            year:year,
+            semester:semester
         },
         success:function(res){
             console.log(res)
@@ -201,7 +327,7 @@ function checkSchedule(){
             setCurrTable(table)
             initHistoryTable(table)
             refreshView()
-            showShadow()
+            showSchedule()
 
             $('.schedule-title').empty()
             $('.schedule-title').append($(`
@@ -245,4 +371,20 @@ function loadHistory(){
         $(this).text('展示已选课程')
     }
     
+}
+function loadSemesters(){
+    $.ajax({
+        url:`${address}/search/semester_list`,
+        type:'get',
+        success:function(res){
+            semesterList = res.semesterList
+            $('.semester select').empty()
+            $('.semester select').append($(`<option value="-" selected>开课学期</option>`))
+            for(let semester of semesterList){
+                $('.semester select').append($(`
+                    <option value="${semester.year}-${semester.semester}">${semester.year} ${semester.semester}</option>
+                `))
+            }
+        }
+    })
 }

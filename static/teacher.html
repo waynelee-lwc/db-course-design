@@ -7,16 +7,15 @@
         <link rel="stylesheet" href="teacher.css">
     </head>
     <body>
-        <div class="shadow">
+        <div class="shadow" style="display: none;">
 
             <div class="grade">
                 <div class="cross">X</div>
                 <div class="grade-title">
-                    <div class="name">数据库课程设计</div>
-                    <div class="teachers">张小利,王欣颖</div>
+                    <!-- <div class="name">数据库课程设计</div>
                     <div class="type">必修课</div>
                     <div class="dept">计算机</div>
-                    <div class="semester">2022 Fall</div>
+                    <div class="semester">2022 Fall</div> -->
                 </div>
                 <div class="grade-table">
                     <table class="table table-striped">
@@ -29,43 +28,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- <tr>
                                 <td>21190000</td>
                                 <td>张三</td>
                                 <td><input type="text" value="98"></td>
                                 <td><button class="btn btn-primary">修改</button></td>
-                            </tr>
-                            <tr>
-                                <td>21190000</td>
-                                <td>张三</td>
-                                <td><input type="text" value="98"></td>
-                                <td><button class="btn btn-primary">修改</button></td>
-                            </tr>
-                            <tr>
-                                <td>21190000</td>
-                                <td>张三</td>
-                                <td><input type="text" value="98"></td>
-                                <td><button class="btn btn-primary">修改</button></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
                 <div class="grade-panel">
-                    <div class="begin-week">从第<b>1</b> 周开始</div>
-                    <div class="end-week">到第<b>10</b>周结束</div>
-                    <div class="building">教学楼:<b>逸夫楼</b></div>
-                    <div class="classroom">教室:<b>第十一阶梯</b></div>
+                    <!-- <div class="building">教学楼:<b>逸夫楼</b></div>
+                    <div class="classroom">教室:<b>第十一阶梯</b></div> -->
                 </div>
             </div>
 
             <div class="schedule" style="display: none;">
                 <div class="cross">X</div>
                 <div class="schedule-title">
-                    <div class="name">数据库课程设计</div>
-                    <div class="teachers">张小利,王欣颖</div>
+                    <!-- <div class="name">数据库课程设计</div>
+                    <div class="teachers">Zhang</div>
                     <div class="type">必修课</div>
                     <div class="dept">计算机</div>
-                    <div class="semester">2022 Fall</div>
+                    <div class="semester">2022 Fall</div> -->
                 </div>
                 <div class="schedule-table">
                     <!-- <div class="schetab-col">
@@ -101,11 +86,11 @@
                     </div> -->
                 </div>
                 <div class="schedule-panel">
-                    <div class="begin-week">从第<b>1</b> 周开始</div>
+                    <!-- <div class="begin-week">从第<b>1</b> 周开始</div>
                     <div class="end-week">到第<b>10</b>周结束</div>
                     <div class="building">教学楼:<b>逸夫楼</b></div>
                     <div class="classroom">教室:<b>第十一阶梯</b></div>
-                    <button class="btn btn-primary show-history">展示已选课程</button>
+                    <button class="btn btn-primary show-history">展示已选课程</button> -->
                 </div>
             </div>
         
@@ -149,20 +134,19 @@
                         <div class="search-bar">
                             <div class="title">课程信息筛选</div>
                             <div class="search-bar-wrapper">
-                                <div class="form-group course_id search-item">
-                                    <input type="text" class="form-control" placeholder="课程编号">
+                                <div class="form-group sec_id search-item">
+                                    <input type="text" class="form-control" placeholder="开课编号">
+                                </div>
+                                <div class="form-group course_name search-item">
+                                    <input type="text" class="form-control" placeholder="课程名称">
                                 </div>
                                 <div class="form-group dept_name search-item">
                                     <input type="text" class="form-control" placeholder="开课学院">
                                 </div>
                                 <div class="form-group semester search-item">
-                                    <input type="text" class="form-control" placeholder="开课学期">
-                                </div>
-                                <div class="form-group status search-item">
-                                    <select class="form-select" id="status_select" name="status">
-                                        <option hidden="hidden" selected="selected" value="-1">请选择课程状态</option>
-                                        <option value="0">未开始</option>
-                                        <option value="1">进行中</option>
+                                    <select class="form-control">
+                                        <option value="-" selected>开课学期</option>
+                                        <!-- <option value="2022-Fall">2022 Fall</option> -->
                                     </select>
                                 </div>
 
@@ -174,31 +158,31 @@
                             <div class="title">课程信息</div>
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th>课程编号</th>
-                                    <th>开课编号</th>
-                                    <th>课程名称</th>
-                                    <th>课程类型</th>
-                                    <th>开课学院</th>
-                                    <th>学分</th>
-                                    <th>开课学期</th>
-                                    <th>开课计划</th>
-                                    <th>授课/取消</th>
-                                </tr>
+                                    <tr>
+                                        <th>课程编号</th>
+                                        <th>开课编号</th>
+                                        <th>课程名称</th>
+                                        <th>课程类型</th>
+                                        <th>开课学院</th>
+                                        <th>学分</th>
+                                        <th>开课学期</th>
+                                        <th>开课计划</th>
+                                        <th>授课/取消</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <!-- <tr>
-                                    <td>100000001</td>
-                                    <td>200000002</td>
-                                    <td>数据库课程设计</td>
-                                    <td>必修课</td>
-                                    <td>软件学院</td>
-                                    <td>2</td>
-                                    <td>2022年秋季</td>
-                                    <td><button class="btn btn-primary">查看</button></td>
-                                    <td><button class="btn btn-success">授课</button></td>
-                                </tr>
-                                </tbody> -->
+                                    <!-- <tr>
+                                        <td>100000001</td>
+                                        <td>200000002</td>
+                                        <td>数据库课程设计</td>
+                                        <td>必修课</td>
+                                        <td>软件学院</td>
+                                        <td>2</td>
+                                        <td>2022年秋季</td>
+                                        <td><button class="btn btn-primary">查看</button></td>
+                                        <td><button class="btn btn-success">授课</button></td>
+                                    </tr> -->
+                                </tbody>
                             </table>
                         </div>
                         <div class="score-table">
@@ -207,23 +191,28 @@
                                 <thead>
                                     <tr>
                                         <th>课程编号</th>
+                                        <th>开课编号</th>
                                         <th>课程名称</th>
                                         <th>课程类型</th>
                                         <th>开课学院</th>
                                         <th>学分</th>
-                                        <th>登记/查看成绩单</th>
+                                        <th>开课学期</th>
+                                        <th>课程状态</th>
+                                        <th>登分/查分</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <!-- <tr>
                                         <td>100000001</td>
+                                        <td>200000002</td>
                                         <td>数据库课程设计</td>
                                         <td>必修课</td>
-                                        <td>计算机科学与技术</td>
+                                        <td>软件学院</td>
                                         <td>2</td>
-                                        <td>40</td>
-                                        <td><button class="btn btn-success">查看</button></td>
-                                    </tr>
+                                        <td>2022年秋季</td>
+                                        <td><button class="btn btn-primary">查看</button></td>
+                                        <td><button class="btn btn-success">授课</button></td>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

@@ -84,7 +84,12 @@
 }
 
 .schetab-row:hover{
+}
+
+.schetab-cell:hover{
     background-color: yellow;
+    transition:all .1s;
+    cursor: pointer;
 }
 
 .schetab-row-head{
@@ -268,4 +273,65 @@
     width: 4rem;
     height: 1.75rem;
     font-size: 0.75rem;
+}
+
+.shadow-section{
+    border: 4px double;
+    position: absolute;
+    height: 60rem;
+    width: 75rem;
+    background: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.schedule-title .create-section-semester{
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+}
+
+.create-section-begin-week input{
+    width: 4rem;
+    text-align: center;
+    padding: 0rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    margin: 0rem 1rem;
+}
+
+.create-section-end-week input{
+    width: 4rem;
+    text-align: center;
+    padding: 0rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    margin: 0rem 1rem;
+}
+
+.create-section-building input{
+    width: 10rem;
+    text-align: center;
+    padding: 0rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    margin: 0rem 1rem;
+}
+
+.create-section-classroom input{
+    width: 10rem;
+    text-align: center;
+    padding: 0rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    margin: 0rem 1rem;
+}
+
+.create-section-semester select{
+    height: 2rem;
+    padding: 0rem 1rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    border-radius: 0rem;
 }

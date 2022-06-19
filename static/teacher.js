@@ -67,8 +67,6 @@ $('.profile-submit').on('click',function(){
 $('.cross').click(hideShadow)
 $('.search-submit').click(reloadTakable)
 
-$('.search-submit').on('click',reloadTakable)
-
 let scoreList = []
 function loadScoreList(){
     $.ajax({
@@ -170,6 +168,7 @@ function loadGradeList(sec,sec_id){
 function hideShadow(){
     $('.shadow').hide()
     $('.schedule').hide()
+    $('.grade').hide()
 }
 
 function showSchedule(){

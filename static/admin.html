@@ -7,198 +7,310 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-<div class="container main">
-    <div class="row" style="height: 100%;">
-        <div class="user-info col-lg-2">
-            <div class="icon">
+    <div class="shadow" style="display: none;">
 
-            </div>
-            <div class="userinfo">
-                欢迎&nbsp;<b>体育</b>&nbsp;学院的&nbsp;<b>郑智</b>&nbsp;老师
-            </div>
-
-            <div class="profile">
-                <div class="profile-wrapper">
-                    <div class="profile-title">个人信息</div>
-
-                    <div class="form-group phone profile-item">
-                        <label for="name">电话号码</label>
-                        <input type="text" class="form-control" placeholder="请输入您的电话号码">
-                    </div>
-                    <div class="form-group email profile-item">
-                        <label for="name">电子邮件</label>
-                        <input type="text" class="form-control" placeholder="请输入您的电子邮件">
-                    </div>
-                    <div class="form-group password profile-item">
-                        <label for="name">修改密码</label>
-                        <input type="password" class="form-control" placeholder="若需修改请填写">
-                    </div>
-                    <div class="form-group passwordrpt profile-item">
-                        <label for="name">重复密码</label>
-                        <input type="password" class="form-control" placeholder="请重复输入密码">
-                    </div>
-                    <button class="btn btn-primary profile-submit">提交修改</button>
+        <div class="shadow-section">
+            <div class="cross">X</div>
+            <div class="schedule-title">
+                <div class="name">数据库课程设计</div>
+                <div class="type">必修课</div>
+                <div class="dept">计算机</div>
+                <div class="form-group create-section-semester">
+                    <select class="form-select" id="status_select" name="status">
+                        <option value="-" selected>开课学期</option>
+                        <!-- <option value="2022-Fall">2022 Fall</option> -->
+                    </select>
                 </div>
+            </div>
+            <div class="schedule-table">
+                <!-- <div class="schetab-col">
+                    <div class="schetab-row schetab-row-head"></div>
+                    <div class="schetab-row schetab-row-head">第一节</div>
+                    <div class="schetab-row schetab-row-head">第二节</div>
+                    <div class="schetab-row schetab-row-head">第三节</div>
+                    <div class="schetab-row schetab-row-head">第四节</div>
+                    <div class="schetab-row schetab-row-head">第五节</div>
+                    <div class="schetab-row schetab-row-head">第六节</div>
+                    <div class="schetab-row schetab-row-head">第七节</div>
+                    <div class="schetab-row schetab-row-head">第八节</div>
+                    <div class="schetab-row schetab-row-head">第九节</div>
+                    <div class="schetab-row schetab-row-head">第十节</div>
+                    <div class="schetab-row schetab-row-head">第十一节</div>
+                </div>
+                <div class="schetab-col">
+                    <div class="schetab-row schetab-row-head">星期一</div>
+
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-blank"></div>
+                    <div class="schetab-row schetab-row-blank"></div>
+
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+
+                    <div class="schetab-row schetab-row-multi"></div>
+                    <div class="schetab-row schetab-row-multi"></div>
+                    <div class="schetab-row schetab-row-multi"></div>
+                </div> -->
+            </div>
+            <div class="schedule-panel">
+                <div class="begin-week create-section-begin-week">从第<b><input type="number" value="1"></b> 周开始</div>
+                <div class="end-week create-section-end-week">到第<b><input type="number" value="20"></b>周结束</div>
+                <div class="building create-section-building">教学楼:<b><input type="text" placeholder="教学楼"></b></div>
+                <div class="classroom create-section-classroom">教室:<b><input type="text" placeholder="教室"></b></div>
+                <button class="btn btn-primary create-section-submit">确认添加</button>
+
             </div>
         </div>
-        <div class="dashboard col-lg-10">
-            <div class="dashboard-wrapper">
-                <div class="search-bar">
-                    <div class="title">课程信息筛选</div>
-                    <div class="search-bar-wrapper">
-                        <div class="form-group sec_id search-item">
-                            <input type="text" class="form-control" placeholder="开课编号">
-                        </div>
-                        <div class="form-group course_name search-item">
-                            <input type="text" class="form-control" placeholder="课程名称">
-                        </div>
-                        <div class="form-group dept_name search-item">
-                            <input type="text" class="form-control" placeholder="开课学院">
-                        </div>
-                        <div class="form-group status search-item">
-                            <select class="form-select" id="status_select" name="status">
-                                <option value="-1" selected>全部课程</option>
-                                <option value="0">不可见</option>
-                                <option value="1">绑定授课</option>
-                                <option value="2">学生选课</option>
-                                <option value="3">授课中</option>
-                                <option value="4">登录成绩</option>
-                                <option value="5">课程结束</option>
-                            </select>
-                        </div>
-                        <div class="form-group semester search-item">
-                            <select class="form-select" id="status_select" name="status">
-                                <option value="-" selected>开课学期</option>
-                                <!-- <option value="2022-Fall">2022 Fall</option> -->
-                            </select>
-                        </div>
 
-                        <button class="btn btn-primary search-submit">搜索</button>
-                    </div>
+        <div class="schedule" style="display: none;">
+            <div class="cross">X</div>
+            <div class="schedule-title">
+                <!-- <div class="name">数据库课程设计</div>
+                <div class="teachers">Zhang</div>
+                <div class="type">必修课</div>
+                <div class="dept">计算机</div>
+                <div class="semester">2022 Fall</div> -->
+            </div>
+            <div class="schedule-table">
+                <!-- <div class="schetab-col">
+                    <div class="schetab-row schetab-row-head"></div>
+                    <div class="schetab-row schetab-row-head">第一节</div>
+                    <div class="schetab-row schetab-row-head">第二节</div>
+                    <div class="schetab-row schetab-row-head">第三节</div>
+                    <div class="schetab-row schetab-row-head">第四节</div>
+                    <div class="schetab-row schetab-row-head">第五节</div>
+                    <div class="schetab-row schetab-row-head">第六节</div>
+                    <div class="schetab-row schetab-row-head">第七节</div>
+                    <div class="schetab-row schetab-row-head">第八节</div>
+                    <div class="schetab-row schetab-row-head">第九节</div>
+                    <div class="schetab-row schetab-row-head">第十节</div>
+                    <div class="schetab-row schetab-row-head">第十一节</div>
+                </div>
+                <div class="schetab-col">
+                    <div class="schetab-row schetab-row-head">星期一</div>
+
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-blank"></div>
+                    <div class="schetab-row schetab-row-blank"></div>
+
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+                    <div class="schetab-row schetab-row-inuse"></div>
+
+                    <div class="schetab-row schetab-row-multi"></div>
+                    <div class="schetab-row schetab-row-multi"></div>
+                    <div class="schetab-row schetab-row-multi"></div>
+                </div> -->
+            </div>
+            <div class="schedule-panel">
+                <!-- <div class="begin-week">从第<b>1</b> 周开始</div>
+                <div class="end-week">到第<b>10</b>周结束</div>
+                <div class="building">教学楼:<b>逸夫楼</b></div>
+                <div class="classroom">教室:<b>第十一阶梯</b></div>
+                <button class="btn btn-primary show-history">展示已选课程</button> -->
+
+                
+            </div>
+        </div>
+    
+    </div>
+    <div class="container main">
+        <div class="row" style="height: 100%;">
+            <div class="user-info col-lg-2">
+                <div class="icon">
 
                 </div>
-                <div class="section-table">
-                    <div class="title">课程管理</div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>课程编号</th>
-                            <th>开课编号</th>
-                            <th>课程名称</th>
-                            <th>课程类型</th>
-                            <th>开课学院</th>
-                            <th>学分</th>
-                            <th>开课学期</th>
-                            <th>开课计划</th>
-                            <th>当前状态</th>
-                            <th>修改状态</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <!-- <tr>
+                <div class="userinfo">
+                    欢迎&nbsp;<b>体育</b>&nbsp;学院的&nbsp;<b>郑智</b>&nbsp;老师
+                </div>
+
+                <div class="profile">
+                    <div class="profile-wrapper">
+                        <div class="profile-title">个人信息</div>
+
+                        <div class="form-group phone profile-item">
+                            <label for="name">电话号码</label>
+                            <input type="text" class="form-control" placeholder="请输入您的电话号码">
+                        </div>
+                        <div class="form-group email profile-item">
+                            <label for="name">电子邮件</label>
+                            <input type="text" class="form-control" placeholder="请输入您的电子邮件">
+                        </div>
+                        <div class="form-group password profile-item">
+                            <label for="name">修改密码</label>
+                            <input type="password" class="form-control" placeholder="若需修改请填写">
+                        </div>
+                        <div class="form-group passwordrpt profile-item">
+                            <label for="name">重复密码</label>
+                            <input type="password" class="form-control" placeholder="请重复输入密码">
+                        </div>
+                        <button class="btn btn-primary profile-submit">提交修改</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard col-lg-10">
+                <div class="dashboard-wrapper">
+                    <div class="search-bar">
+                        <div class="title">课程信息筛选</div>
+                        <div class="search-bar-wrapper">
+                            <div class="form-group sec_id search-item">
+                                <input type="text" class="form-control" placeholder="开课编号">
+                            </div>
+                            <div class="form-group course_name search-item">
+                                <input type="text" class="form-control" placeholder="课程名称">
+                            </div>
+                            <div class="form-group dept_name search-item">
+                                <input type="text" class="form-control" placeholder="开课学院">
+                            </div>
+                            <div class="form-group status search-item">
+                                <select class="form-select" id="status_select" name="status">
+                                    <option value="-1" selected>全部课程</option>
+                                    <option value="0">不可见</option>
+                                    <option value="1">绑定授课</option>
+                                    <option value="2">学生选课</option>
+                                    <option value="3">授课中</option>
+                                    <option value="4">登录成绩</option>
+                                    <option value="5">课程结束</option>
+                                </select>
+                            </div>
+                            <div class="form-group semester search-item">
+                                <select class="form-select" id="status_select" name="status">
+                                    <option value="-" selected>开课学期</option>
+                                    <!-- <option value="2022-Fall">2022 Fall</option> -->
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary search-submit">搜索</button>
+                        </div>
+
+                    </div>
+                    <div class="section-table">
+                        <div class="title">课程管理</div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>课程编号</th>
+                                <th>开课编号</th>
+                                <th>课程名称</th>
+                                <th>课程类型</th>
+                                <th>开课学院</th>
+                                <th>学分</th>
+                                <th>开课学期</th>
+                                <th>开课计划</th>
+                                <th>当前状态</th>
+                                <th>修改状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr>
+                                    <td>100000001</td>
+                                    <td>200000002</td>
+                                    <td>数据库课程设计</td>
+                                    <td>必修课</td>
+                                    <td>软件学院</td>
+                                    <td>2</td>
+                                    <td>2022年秋季</td>
+                                    <td><button class="btn btn-primary">修改</button></td>
+                                    <td>
+                                        <select class="table-status"  name="status">
+                                            <option value="0">未开始</option>
+                                            <option value="1">进行中</option>
+                                        </select>
+                                    </td>
+                                    <td><button>修改状态</button></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="create-course">
+                        <div class="title">增加课程</div>
+                        <div class="create-course-wrapper">
+                            <div class="form-group create_course_id search-item">
+                                <input type="text" class="form-control" placeholder="课程编号">
+                            </div>
+                            <div class="form-group create_course_name search-item">
+                                <input type="text" class="form-control" placeholder="课程名称">
+                            </div>
+                            <div class="form-group create_course_type search-item">
+                                <select>
+                                    <option value="" selected disabled>课程类型</option>
+                                    <option value="必修课">必修课</option>
+                                    <option value="选修课">选修课</option>
+                                    <option value="公选课">公选课</option>
+                                    <option value="必选课">必选课</option>
+                                </select>
+                            </div>
+                            <div class="form-group create_dept_name search-item">
+                                <select>
+                                    <option value="" selected disabled>开课学院</option>
+                                    <option value="计算机科学与技术学院">计算机科学与技术学院</option>
+                                    <option value="软件学院">软件学院</option>
+                                    <option value="电子学院">电子学院</option>
+                                    <option value="机械学院">机械学院</option>
+                                    <option value="艺术学院">艺术学院</option>
+                                </select>
+                            </div>
+                            <div class="form-group create_credits search-item">
+                                <select>
+                                    <option value="0" selected disabled>学分</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary create-course-submit">创建</button>
+                        </div>
+
+                    </div>
+                    <div class="course-table">
+                        <!-- <div class="title">开课管理</div> -->
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>课程编号</th>
+                                <th>课程名称</th>
+                                <th>课程类型</th>
+                                <th>开课学院</th>
+                                <th>学分</th>
+                                <th>开设课程</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
                                 <td>100000001</td>
-                                <td>200000002</td>
                                 <td>数据库课程设计</td>
                                 <td>必修课</td>
-                                <td>软件学院</td>
+                                <td>计算机科学与技术</td>
                                 <td>2</td>
-                                <td>2022年秋季</td>
-                                <td><button class="btn btn-primary">修改</button></td>
-                                <td>
-                                    <select class="table-status"  name="status">
-                                        <option value="0">未开始</option>
-                                        <option value="1">进行中</option>
-                                    </select>
-                                </td>
-                                <td><button>修改状态</button></td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="create-course">
-                    <div class="title">增加课程</div>
-                    <div class="create-course-wrapper">
-                        <div class="form-group create_course_id search-item">
-                            <input type="text" class="form-control" placeholder="课程编号">
-                        </div>
-                        <div class="form-group create_course_name search-item">
-                            <input type="text" class="form-control" placeholder="课程名称">
-                        </div>
-                        <div class="form-group create_course_type search-item">
-                            <select>
-                                <option value="" selected disabled>课程类型</option>
-                                <option value="必修课">必修课</option>
-                                <option value="选修课">选修课</option>
-                                <option value="公选课">公选课</option>
-                                <option value="必选课">必选课</option>
-                            </select>
-                        </div>
-                        <div class="form-group create_dept_name search-item">
-                            <select>
-                                <option value="" selected disabled>开课学院</option>
-                                <option value="计算机科学与技术学院">计算机科学与技术学院</option>
-                                <option value="软件学院">软件学院</option>
-                                <option value="电子学院">电子学院</option>
-                                <option value="机械学院">机械学院</option>
-                                <option value="艺术学院">艺术学院</option>
-                            </select>
-                        </div>
-                        <div class="form-group create_credits search-item">
-                            <select>
-                                <option value="0" selected disabled>学分</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                            </select>
-                        </div>
+                                <td><button class="btn btn-primary">开设课程</button></td>
 
-                        <button class="btn btn-primary create-course-submit">创建</button>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-
-                </div>
-                <div class="course-table">
-                    <!-- <div class="title">开课管理</div> -->
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>课程编号</th>
-                            <th>课程名称</th>
-                            <th>课程类型</th>
-                            <th>开课学院</th>
-                            <th>学分</th>
-                            <th>开设课程</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>100000001</td>
-                            <td>数据库课程设计</td>
-                            <td>必修课</td>
-                            <td>计算机科学与技术</td>
-                            <td>2</td>
-                            <td><button class="btn btn-primary">开设课程</button></td>
-
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
 <script src="jquery.js"></script>

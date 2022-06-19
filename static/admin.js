@@ -69,7 +69,24 @@ $('.profile-submit').on('click',function(){
 
 $('.search-submit').click(loadSectionList)
 $('.create-course-submit').click(createCourse)
+$('.cross').click(hideShadow)
 
+
+function hideShadow(){
+    $('.shadow').hide()
+    $('.schedule').hide()
+    $('.shadow-section').hide()
+}
+
+function showSchedule(){
+    $('.shadow').show()
+    $('.schedule').show()
+}
+
+function showShadowSection(){
+    $('.shadow').show()
+    $('.shadow-section').show()
+}
 
 function createCourse(){
     let course_id = $('.create_course_id input').val()
@@ -102,6 +119,11 @@ function createCourse(){
             }else{
                 alert('添加成功!')
                 loadCourseList()
+                $('.create_course_id input').val('')
+                $('.create_course_name input').val('')
+                $('.create_dept_name select').val('')
+                $('.create_credits select').val(0)
+                $('.create_course_type select').val('')
             }
         }
     })
@@ -181,6 +203,7 @@ function loadSectionList(){
     })
 }
 
+let semesterList = []
 function loadSemesters(){
     $.ajax({
         url:`${address}/search/semester_list`,
@@ -227,16 +250,63 @@ function loadCourseList(){
                             <td>${course.course_type}</td>
                             <td>${course.dept_name}</td>
                             <td>${course.credits}</td>
-                            <td><button class="btn btn-primary create-section" id="create-section-${course.course_id}">开设课程</button></td>
+                            <td><button class="btn btn-primary create-section" id="create-section-${idx}-${course.course_id}">开设课程</button></td>
                         </tr>
                     `))
                 }
-                $('.create-section').click(createSection())
+                $('.create-section').click(createSection)
             }
         }
     })
 }
 
 function createSection(){
+    let id = $(this).attr('id')
+    let idx = id.split('-')[2]
+    let course_id = id.split('-')[3]
+    let course = courseList[idx]
 
+    $('.schedule-title').empty()
+    $('.schedule-title').append(`
+        <div class="name">${course.title}</div>
+        <div class="type">${course.course_type}</div>
+        <div class="dept">${course.dept_name}</div>
+        <div class="form-group create-section-semester">
+            <select class="form-select" id="status_select" name="status">
+                <option value="-" selected disabled>开课学期</option>
+                <!-- <option value="2022-Fall">2022 Fall</option> -->
+            </select>
+        </div>
+    `)
+    for(let semester of semesterList){
+        $('.create-section-semester select').append(`
+            <option value="${semester.year}-${semester.semester}">${semester.year} ${semester.semester}</option>
+        `)
+    }
+    
+    $('.schedule-panel').empty()
+    $('.schedule-panel').append($(`
+        <div class="begin-week create-section-begin-week">从第<b><input type="number" value="1"></b> 周开始</div>
+        <div class="end-week create-section-end-week">到第<b><input type="number" value="20"></b>周结束</div>
+        <div class="building create-section-building">教学楼:<b><input type="text" placeholder="教学楼"></b></div>
+        <div class="classroom create-section-classroom">教室:<b><input type="text" placeholder="教室"></b></div>
+        <button class="btn btn-danger create-section-submit">确认添加</button>
+    `))
+
+    showShadowSection()
+    initCurrTable()
+    initHistoryTable()
+    refreshView()
+
+    $('.schetab-cell').click(selectCell)
+}
+
+function selectCell(){
+    let id = $(this).attr('id')
+    let i = id.split('-')[1]
+    let j = id.split('-')[2]
+    
+    currTable[i][j] = 1 - currTable[i][j]
+    refreshView()
+    $('.schetab-cell').click(selectCell)
 }

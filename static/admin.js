@@ -7,6 +7,11 @@ let address = 'http://60.205.211.19:3011'
 
 $(document).ready(()=>{
 
+    let token = JSON.parse(localStorage.getItem('token'))
+    if(!token){
+        alert('请先登录!')
+        location.href('/index.html')
+    }
     
     let user = JSON.parse(localStorage.getItem('userinfo'))
     let data={
@@ -47,7 +52,7 @@ $('.profile-submit').on('click',function(){
         url:`${address}/user/update_profile`,
         headers:{
             token:JSON.parse(localStorage.getItem('token'))
-            // token:'teacher'
+            // token:'admin'
         },
         type:'post',
         data:{
@@ -104,8 +109,8 @@ function createCourse(){
     $.ajax({
         url:`${address}/admin/create_course`,
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'admin'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'admin'
         },
         type:'post',
         data:{
@@ -152,8 +157,8 @@ function loadSectionList(){
         url:`${address}/admin/section_list`,
         type:'get',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'admin'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'admin'
         },
         data:{
             course_name:course_name,
@@ -214,8 +219,8 @@ function updateStatus(){
         url:`${address}/admin/update_section`,
         type:'post',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'admin'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'admin'
         },
         data:{
             sec_id:sec_id,
@@ -256,8 +261,8 @@ function loadCourseList(){
         url:`${address}/admin/course_list`,
         type:'get',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'admin'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'admin'
         },
         data:{
             course_name:'',
@@ -399,8 +404,8 @@ function createSectionSubmit(){
         url:`${address}/admin/create_section`,
         type:'post',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'admin'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'admin'
         },
         data:{
             course_id:course_id,

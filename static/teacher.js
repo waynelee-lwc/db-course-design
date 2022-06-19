@@ -7,6 +7,11 @@ let address = 'http://60.205.211.19:3011'
 
 
 $(document).ready(()=>{
+    let token = JSON.parse(localStorage.getItem('token'))
+    if(!token){
+        alert('请先登录!')
+        location.href('/index.html')
+    }
     let user = JSON.parse(localStorage.getItem('userinfo'))
 
     $('.userinfo').empty()

@@ -426,8 +426,8 @@ function createSectionSubmit(){
     let semester = $('.create-section-semester select').val()
     let year = semester.split('-')[0]
     semester = semester.split('-')[1]
-    let building = $('.create-section-building input').val()
-    let room_number = $('.create-section-classroom input').val()
+    let building = $('.create-section-building select').val().split('-')[0]
+    let room_number = $('.create-section-building select').val().split('-')[1]
     let begin_week = $('.create-section-begin-week input').val()
     let end_week = $('.create-section-end-week input').val()
     let time_slot = getCurrSchedule()

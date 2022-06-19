@@ -17,7 +17,7 @@ $(document).ready(()=>{
 
     $('.userinfo').empty()
     $('.userinfo').html(
-        `<b>${user.dept_name}</b>&nbsp;学院<br>&nbsp;<b>${user.name}</b>&nbsp;老师`
+        `管理员<br><b>${user.name}</b><br>您好`
     )
 
     $('.phone input').val(user.phone)
@@ -79,11 +79,13 @@ function hideShadow(){
 }
 
 function showSchedule(){
+    hideShadow()
     $('.shadow').show()
     $('.schedule').show()
 }
 
 function showShadowSection(){
+    hideShadow()
     $('.shadow').show()
     $('.shadow-section').show()
 }
@@ -197,8 +199,35 @@ function loadSectionList(){
                     $(`#status-${sec.sec_id}`).val(sec.status)
                 }
             }
-            // $('.update_status').click(takeUntake)
-            // $('.check-schedule').click(checkSchedule)
+            $('.update-status').click(updateStatus)
+            $('.check-schedule').click(checkSchedule)
+        }
+    })
+}
+
+function updateStatus(){
+    let id = $(this).attr('id')
+    let sec_id = id.split('-')[2]
+    let status = $(`#status-${sec_id}`).val()
+
+    $.ajax({
+        url:`${address}/admin/update_section`,
+        type:'post',
+        headers:{
+            // token:JSON.parse(localStorage.getItem('token'))
+            token:'admin'
+        },
+        data:{
+            sec_id:sec_id,
+            status:status
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                alert('修改状态成功!')
+                loadSectionList()
+            }
         }
     })
 }
@@ -300,6 +329,46 @@ function createSection(){
     refreshView()
 
     $('.schetab-cell').click(selectCell)
+}
+
+function checkSchedule(){
+    let id = $(this).attr('id')
+    let sec_id = id.split('-')[1]
+    let idx = id.split('-')[0]
+    sec = sectionList[idx]
+    console.log(sec)
+
+    $.ajax({
+        url:`${address}/search/get_time_slog_by_sec_id`,
+        type:'get',
+        data:{
+            sec_id:sec_id
+        },
+        success:function(res){
+            timeslot = res.data.timeSlot
+            table = parseSchedule(timeslot)
+            setCurrTable(table)
+            initHistoryTable(table)
+            refreshView()
+            showSchedule()
+
+            $('.schedule-title').empty()
+            $('.schedule-title').append($(`
+                <div class="name">${sec.title}</div>
+                <div class="type">${sec.course_type}</div>
+                <div class="dept">${sec.dept_name}</div>
+                <div class="semester">${sec.year} ${sec.semester}</div>
+            `))
+
+            $('.schedule-panel').empty()
+            $('.schedule-panel').append($(`
+                <div class="begin-week">从第<b>${timeslot.begin_week}</b>周开始</div>
+                <div class="end-week">到第<b>${timeslot.end_week}</b>周结束</div>
+                <div class="building">教学楼:<b>${sec.building}</b></div>
+                <div class="classroom">教室:<b>${sec.room_number}</b></div>
+            `))
+        }
+    })
 }
 
 function selectCell(){

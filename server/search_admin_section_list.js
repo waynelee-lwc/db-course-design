@@ -37,7 +37,7 @@ async function search_admin_section_list(req, res) {
         sql += mysql.format(" and section.sec_id = ? ", data.sec_id)
 
     if(data.sec_status != "")
-        sql += mysql.format(" and section.sec_status = ? ", data.sec_status)
+        sql += mysql.format(" and section.status = ? ", data.sec_status)
 
     var result = await query(sql)
    	res.send({

@@ -88,3 +88,17 @@ function setCurrTable(table){
         }
     }
 }
+
+function getCurrSchedule(){
+    let keys = ['','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+    let res = {}
+    for(let i = 1;i <= 7;i++){
+        let str = '0'
+        for(let j = 1;j <= 11;j++){
+            str += currTable[i][j]
+        }
+        let key = keys[i]
+        res[key] = str
+    }
+    return res
+}

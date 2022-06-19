@@ -290,8 +290,9 @@ function createSection(){
         <div class="end-week create-section-end-week">到第<b><input type="number" value="20"></b>周结束</div>
         <div class="building create-section-building">教学楼:<b><input type="text" placeholder="教学楼"></b></div>
         <div class="classroom create-section-classroom">教室:<b><input type="text" placeholder="教室"></b></div>
-        <button class="btn btn-danger create-section-submit">确认添加</button>
+        <button class="btn btn-danger create-section-submit" id="create-section-submit-${course_id}">确认添加</button>
     `))
+    $('.create-section-submit').click(createSectionSubmit)
 
     showShadowSection()
     initCurrTable()
@@ -309,4 +310,46 @@ function selectCell(){
     currTable[i][j] = 1 - currTable[i][j]
     refreshView()
     $('.schetab-cell').click(selectCell)
+}
+
+function createSectionSubmit(){
+    let id = $(this).attr('id')
+    let course_id = id.split('-')[3]
+    let semester = $('.create-section-semester select').val()
+    let year = semester.split('-')[0]
+    semester = semester.split('-')[1]
+    let building = $('.create-section-classroom input').val()
+    let room_number = $('.create-section-classroom input').val()
+    let begin_week = $('.create-section-begin-week input').val()
+    let end_week = $('.create-section-end-week input').val()
+    let time_slot = getCurrSchedule()
+    time_slot.begin_week = begin_week
+    time_slot.end_week = end_week
+    
+    $.ajax({
+        url:`${address}/admin/create_section`,
+        type:'post',
+        headers:{
+            // token:JSON.parse(localStorage.getItem('token'))
+            token:'admin'
+        },
+        data:{
+            course_id:course_id,
+            year:year,
+            semester:semester,
+            building:building,
+            room_number:room_number,
+            status:0,
+            time_slot:time_slot
+        },
+        success:function(res){
+            if(res.code != 200){
+                alert(res.message)
+            }else{
+                alert('添加成功！')
+                hideShadow()
+                loadSectionList()
+            }
+        }
+    })
 }

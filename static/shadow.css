@@ -319,6 +319,15 @@
     margin: 0rem 1rem;
 }
 
+.create-section-building select{
+    width: 20rem;
+    text-align: center;
+    padding: 0rem;
+    border: 0rem;
+    border-bottom: 1px solid;
+    margin: 0rem 1rem;
+}
+
 .create-section-classroom input{
     width: 10rem;
     text-align: center;

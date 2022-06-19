@@ -294,10 +294,36 @@ function loadCourseList(){
     })
 }
 
+let classroomList = [
+    {
+        building:'逸夫楼',
+        room_number:'109'
+    },
+    {
+        building:'逸夫楼',
+        room_number:'210'
+    },
+    {
+        building:'逸夫楼',
+        room_number:'311'
+    },
+    {
+        building:'计算机楼',
+        room_number:'207'
+    },
+    {
+        building:'计算机楼',
+        room_number:'208'
+    },
+    {
+        building:'计算机楼',
+        room_number:'209'
+    },
+]
 function createSection(){
     let id = $(this).attr('id')
     let idx = id.split('-')[2]
-    let course_id = id.split('-')[3]
+    let course_id = id.split('-')[3]+'-' + id.split('-')[4]
     let course = courseList[idx]
 
     $('.schedule-title').empty()
@@ -322,11 +348,19 @@ function createSection(){
     $('.schedule-panel').append($(`
         <div class="begin-week create-section-begin-week">从第<b><input type="number" value="1"></b> 周开始</div>
         <div class="end-week create-section-end-week">到第<b><input type="number" value="20"></b>周结束</div>
-        <div class="building create-section-building">教学楼:<b><input type="text" placeholder="教学楼"></b></div>
-        <div class="classroom create-section-classroom">教室:<b><input type="text" placeholder="教室"></b></div>
+        <div class="building create-section-building">
+            <select>
+                <option value="-" selected disabled>上课地点</option>
+            </select>
+        </div>
         <button class="btn btn-danger create-section-submit" id="create-section-submit-${course_id}">确认添加</button>
     `))
     $('.create-section-submit').click(createSectionSubmit)
+    for(let classroom of classroomList){
+        $('.create-section-building select').append($(`
+            <option value="${classroom.building}-${classroom.room_number}">${classroom.building}-${classroom.room_number}</option>
+        `))
+    }
 
     showShadowSection()
     initCurrTable()
@@ -388,11 +422,11 @@ function selectCell(){
 
 function createSectionSubmit(){
     let id = $(this).attr('id')
-    let course_id = id.split('-')[3]
+    let course_id = id.split('-')[3] + '-' + id.split('-')[4]
     let semester = $('.create-section-semester select').val()
     let year = semester.split('-')[0]
     semester = semester.split('-')[1]
-    let building = $('.create-section-classroom input').val()
+    let building = $('.create-section-building input').val()
     let room_number = $('.create-section-classroom input').val()
     let begin_week = $('.create-section-begin-week input').val()
     let end_week = $('.create-section-end-week input').val()

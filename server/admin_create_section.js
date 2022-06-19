@@ -18,9 +18,18 @@ async function admin_create_section(req, res) {
     	})
         return 
     }
-    var data = req.query
-    var sql = ("select * from course where 1=1 ")
+    
+    // time_slot_id, 
+    // begin_week, end_week, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+    
+    // course_id, sec_id, semester, year, building, room_number, status //time_slot_id
+
+    var data = req.body
+    var sql = mysql.format("insert")
     var result = await query(sql)
+
+    sql = mysql.format("insert into section(course_id, sec_id, semester, year, building, room_number, time_slot_id, status) ")
+
    	res.send({
    		"message":"",
    		"code":200,

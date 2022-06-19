@@ -19,7 +19,7 @@ async function admin_create_course(req, res) {
         return 
     }
     var data = req.body
-    var sql = mysql.format("insert into course(course_id, title, dept_name, credits, course_type) VALUES (?,?,?,?,?)",[data.course_id, data.title, data.dept_name, data.credits, data.course_type])
+    var sql = mysql.format("insert into course(course_id, title, dept_name, credits, course_type) values (?,?,?,?,?)",[data.course_id, data.title, data.dept_name, data.credits, data.course_type])
     var result = await query(sql)
    	res.send({
    		"message":"",

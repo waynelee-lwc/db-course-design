@@ -18,18 +18,11 @@ async function admin_update_section(req, res) {
     	})
         return 
     }
-    
-    // sec_id 
-    // course_id
-    // semester 
-    // year 
-    // building
-    // room_number
-    // time_slot_id
+
     // status
 
-    var data = req.query
-    var sql = mysql.format("update section set ")
+    var data = req.body
+    var sql = mysql.format("update section set status = ? where section.sec_id = ? ", [data.status, data.sec_id])
     var result = await query(sql)
    	res.send({
    		"message":"",

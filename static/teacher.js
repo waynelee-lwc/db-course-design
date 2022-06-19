@@ -242,8 +242,8 @@ function reloadTakable(){
         url:`${address}/teacher/section_list_takable`,
         type:'get',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         data:{
             sec_id:sec_id,
@@ -292,8 +292,8 @@ function takeUntake(){
         url:`${address}/teacher/take_untake`,
         type:'post',
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         data:{
             operation:operation,

@@ -106,8 +106,9 @@ app.post('/admin/create_course', admin_create_course)
 admin_create_section = require('./server/admin_create_section.js')
 app.post('/admin/create_section', admin_create_section)
 
-// // 管理员修改sectionadmin_update_section = require('./server/admin_update_section.js')
-// app.post('/admin/update_section', admin_update_section)
+// 管理员修改section
+admin_update_section = require('./server/admin_update_section.js')
+app.post('/admin/update_section', admin_update_section)
 
 
 let server = app.listen(3011,()=>{

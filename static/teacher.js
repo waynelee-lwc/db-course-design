@@ -43,8 +43,8 @@ $('.profile-submit').on('click',function(){
     $.ajax({
         url:`${address}/user/update_profile`,
         headers:{
-            // token:JSON.parse(localStorage.getItem('token'))
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         type:'post',
         data:{
@@ -75,7 +75,8 @@ function loadScoreList(){
         url:`${address}/teacher/get_score_list`,
         type:'get',
         headers:{
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         success:function(res){
             console.log(res)
@@ -136,7 +137,8 @@ function loadGradeList(sec,sec_id){
         url:`${address}/teacher/take_score_list`,
         type:'get',
         headers:{
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         data:{
             sec_id:sec_id
@@ -195,7 +197,8 @@ function setStudentGrade(){
             grade:grade
         },
         headers:{
-            token:'teacher'
+            token:JSON.parse(localStorage.getItem('token'))
+            // token:'teacher'
         },
         success:function(res){
             if(res.code == 200){

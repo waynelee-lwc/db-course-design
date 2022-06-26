@@ -3,7 +3,7 @@ window.onresize = function(){
     // console.log("当前尺寸为：" + window.innerWidth);
     document.getElementsByTagName('html')[0].style.fontSize = (16/1920) * window.innerWidth + "px";
 }
-let address = 'http://60.205.211.19:3011'
+let address = 'http://43.138.86.233:3011'
 
 
 $(document).ready(()=>{

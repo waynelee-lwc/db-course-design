@@ -12,7 +12,7 @@ $('.schetab-cell').click(function(e){
     alert(id)
 })
 
-let address = 'http://60.205.211.19:3011'
+let address = 'http://43.138.86.233:3011'
 
 $(document).ready(()=>{
     let token = JSON.parse(localStorage.getItem('token'))
